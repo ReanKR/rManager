@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class rManagerSecurity extends JavaPlugin
 {
-	public static void InteractJoinToWorld(PlayerTeleportEvent Event) //±İÁö ¿ùµå·Î µé¾î°¡´Â °Å ¹æÁö
+	public static void InteractJoinToWorld(PlayerTeleportEvent Event) //ê¸ˆì§€ ì›”ë“œë¡œ ë“¤ì–´ê°€ëŠ” ê±° ë°©ì§€í•œë‹¤.
 	{
 		rManagerPlayerFile.LoadPlayer(Event.getPlayer());
 		Location getFrom = Event.getFrom();
@@ -26,10 +26,10 @@ public class rManagerSecurity extends JavaPlugin
 		boolean SameGuild = false;
 		int i = 0;
 		rManager.BlockWorlds = C.getStringList("Block-Worlds");
-		// ¸¸¾à¿¡ ¿ùµå°¡ ¹Ù²î¾ú´Ù¸é
+		// ë§Œì•½ì— ì›”ë“œê°€ ë°”ë€Œì—ˆë‹¤ë©´
 		if(! getFrom.getWorld().getName().equalsIgnoreCase(getTo.getWorld().getName()))
 		{
-			// ÇöÀç ÀÌµ¿ÇÑ ¿ùµå°¡ ±İÁöµÈ ¿ùµåÀÎÁö ¿ì¼± È®ÀÎÇÑ´Ù.
+			// í˜„ì¬ ì´ë™í•œ ì›”ë“œê°€ ê¸ˆì§€ëœ ì›”ë“œì¸ì§€ ìš°ì„  í™•ì¸í•œë‹¤.
 			while(i != rManager.BlockWorlds.size())
 			{
 				if(getTo.getWorld().getName().equalsIgnoreCase(rManager.BlockWorlds.get(i)))
@@ -39,91 +39,91 @@ public class rManagerSecurity extends JavaPlugin
 				}
 				i++;
 			}
-			// ¸¸¾à ÇØ´ç ¿ùµå°¡ ±İÁö ¸®½ºÆ®¿¡ ¿À¸¥ ¿ùµå¿´´Ù¸é
+			// ë§Œì•½ í•´ë‹¹ ì›”ë“œê°€ ê¸ˆì§€ ë¦¬ìŠ¤íŠ¸ì— ì˜¤ë¥¸ ì›”ë“œì˜€ë‹¤ë©´
 			if(found)
 			{
 				rManager.GuildInfo = C.getStringList("Groups");
-				// ±æµå°¡ ÀÖ´ÂÁö È®ÀÎÇØ¾ß ÇÏ´Âµ¥ ¸¸¾à ±æµå°¡ ¾ø´Ù¸é
+				// ê¸¸ë“œê°€ ìˆëŠ”ì§€ í™•ì¸í•´ì•¼ í•˜ëŠ”ë° ë§Œì•½ ê¸¸ë“œê°€ ì—†ë‹¤ë©´
 				if(GuildName.equalsIgnoreCase("NONE") || GuildName.equalsIgnoreCase("LOAD_FAILED"))
 				{
 					int j = 0;
-					// ¿ì¼± ±× ¿ùµåÀÇ ¼ÒÀ¯ ±æµå°¡ ¾î¶² ±æµåÀÎÁö ºÎÅÍ È®ÀÎÇÑ´Ù.
+					// ìš°ì„  ê·¸ ì›”ë“œì˜ ì†Œìœ  ê¸¸ë“œê°€ ì–´ë–¤ ê¸¸ë“œì¸ì§€ ë¶€í„° í™•ì¸í•œë‹¤.
 					while(j != rManager.GuildInfo.size())
 					{
 						String[] Cutter = rManager.GuildInfo.get(j).split(",");
-						// ¸¸¾à ¾î¶² ±æµå°¡ ¼ÒÀ¯ÇÏ°í ÀÖ´Â ¿ùµå¿´´Ù¸é
+						// ë§Œì•½ ì–´ë–¤ ê¸¸ë“œê°€ ì†Œìœ í•˜ê³  ìˆëŠ” ì›”ë“œì˜€ë‹¤ë©´
 						if(Cutter[3].equalsIgnoreCase(getTo.getWorld().getName()))
 						{
-							// ±× ¿ùµå¸¦ °¡Áö°í ÀÖ´Â ±æµå ¸®´õÀÇ Á¤º¸¸¦ ÀÎ½ÄÇÏ¿© ÇØ´ç ÇÃ·¹ÀÌ¾î°¡ Çã¶ôµÇ¾ú´ÂÁö ÇĞÀÎÇÑ´Ù.
+							// ê·¸ ì›”ë“œë¥¼ ê°€ì§€ê³  ìˆëŠ” ê¸¸ë“œ ë¦¬ë”ì˜ ì •ë³´ë¥¼ ì¸ì‹í•˜ì—¬ í•´ë‹¹ í”Œë ˆì´ì–´ê°€ í—ˆë½ë˜ì—ˆëŠ”ì§€ í•™ì¸í•œë‹¤.
 							AllowTeleport = ChackAllowByLeader(player, Cutter[2], false);
 							break;
 						}
 						j++;
 					}
-					if(AllowTeleport == false)// ¸¸¾à¿¡ ±× ¿ùµåÀÇ ¼ÒÀ¯°¡ ¾ø¾ú´Ù¸é
+					if(AllowTeleport == false)// ë§Œì•½ì— ê·¸ ì›”ë“œì˜ ì†Œìœ ê°€ ì—†ì—ˆë‹¤ë©´
 					{
 						if(player.hasPermission("rmanager.teleport.bypass"))
 						{
 							return;
 						}
 						Event.setCancelled(true);
-						player.sendMessage(rManager.Prefix + "¡×cÇØ´ç ¿ùµå·Î ÀÌµ¿ÇÒ ¼ö ¾ø¾ú½À´Ï´Ù.");
-						player.sendMessage(rManager.Prefix + "¡×b»çÀ¯ ¡×f: ¡×6ÇØ´ç ¿ùµå´Â ±æµå °ü°èÀÚ Çã°¡°¡ ÀÖ¾î¾ß ÇÕ´Ï´Ù.");
+						player.sendMessage(rManager.Prefix + "Â§cí•´ë‹¹ ì›”ë“œë¡œ ì´ë™í•  ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
+						player.sendMessage(rManager.Prefix + "Â§bì‚¬ìœ  Â§f: Â§6í•´ë‹¹ ì›”ë“œëŠ” ê¸¸ë“œ ê´€ê³„ì í—ˆê°€ê°€ ìˆì–´ì•¼ í•©ë‹ˆë‹¤.");
 						return;
 					}
 				}
-				else // ¸¸¾à¿¡ ±æµå°¡ ÀÖ´Â »ç¶÷ÀÌ¶ó¸é
+				else // ë§Œì•½ì— ê¸¸ë“œê°€ ìˆëŠ” ì‚¬ëŒì´ë¼ë©´
 				{
 					rManager.GuildInfo = C.getStringList("Groups");
 					int j = 0;
-					// ¿ì¼± ±× ¿ùµåÀÇ ¼ÒÀ¯ ±æµå°¡ ¾î¶² ±æµåÀÎÁö ºÎÅÍ È®ÀÎÇÑ´Ù.
+					// ìš°ì„  ê·¸ ì›”ë“œì˜ ì†Œìœ  ê¸¸ë“œê°€ ì–´ë–¤ ê¸¸ë“œì¸ì§€ ë¶€í„° í™•ì¸í•œë‹¤.
 					while(j != rManager.GuildInfo.size())
 					{
 						String[] Cutter = rManager.GuildInfo.get(j).split(",");
-						// ¸¸¾à ÇØ´ç ÇÃ·¹ÀÌ¾î ±æµå ¼Ò¼ÓÀÌ°í °¡·Á´Â ¿ùµå°¡ ±æµå°¡ °¡Áö°í ÀÖ´Â ¿ùµå¶ó¸é
+						// ë§Œì•½ í•´ë‹¹ í”Œë ˆì´ì–´ ê¸¸ë“œ ì†Œì†ì´ê³  ê°€ë ¤ëŠ” ì›”ë“œê°€ ê¸¸ë“œê°€ ê°€ì§€ê³  ìˆëŠ” ì›”ë“œë¼ë©´
 						if(Cutter[1].equalsIgnoreCase(GuildName) && Cutter[3].equalsIgnoreCase(getTo.getWorld().getName()))
 						{
-							if(Cutter[2].equalsIgnoreCase(player.getName()) && Cutter[3].equalsIgnoreCase(getTo.getWorld().getName())) // ¸¸¾à ÇØ´ç ¿ùµåÀÇ ¸®´õÀåÀÌ¿´´Ù¸é
+							if(Cutter[2].equalsIgnoreCase(player.getName()) && Cutter[3].equalsIgnoreCase(getTo.getWorld().getName())) // ë§Œì•½ í•´ë‹¹ ì›”ë“œì˜ ë¦¬ë”ì¥ì´ì˜€ë‹¤ë©´
 							{
 								AllowTeleport = true;
 								break;
 							}
-							// ¾Æ´Ï¶ó¸é 1Â÷´Â ÀÏ´Ü  Åë°ú, ±×¸®°í ¸®´õ°¡ ÇØ´ç À¯Àú¸¦ ºí·¢¸®½ºÆ®·Î µî·ÏÇß´ÂÁö È®ÀÎÇÑ´Ù.
+							// ì•„ë‹ˆë¼ë©´ 1ì°¨ëŠ” ì¼ë‹¨  í†µê³¼, ê·¸ë¦¬ê³  ë¦¬ë”ê°€ í•´ë‹¹ ìœ ì €ë¥¼ ë¸”ë™ë¦¬ìŠ¤íŠ¸ë¡œ ë“±ë¡í–ˆëŠ”ì§€ í™•ì¸í•œë‹¤.
 							SameGuild = true;
 							AllowTeleport = ChackAllowByLeader(player, Cutter[2], true);
 							break;
 						}
 						
-						// ¸¸¾à ÇØ´ç ÇÃ·¹ÀÌ¾î ÇØ´ç ±æµå ¼Ò¼ÓÀÌ ¾Æ´ÏÁö¸¸ °¡·Á´Â ¿ùµå°¡ ¾î¶² ±æµå°¡ °¡Áö°í ÀÖ´Â ¿ùµå¿´´Ù¸é 
+						// ë§Œì•½ í•´ë‹¹ í”Œë ˆì´ì–´ í•´ë‹¹ ê¸¸ë“œ ì†Œì†ì´ ì•„ë‹ˆì§€ë§Œ ê°€ë ¤ëŠ” ì›”ë“œê°€ ì–´ë–¤ ê¸¸ë“œê°€ ê°€ì§€ê³  ìˆëŠ” ì›”ë“œì˜€ë‹¤ë©´ 
 						if(!(Cutter[1].equalsIgnoreCase(GuildName)))
 						{
 							if(Cutter[3].equalsIgnoreCase(getTo.getWorld().getName()))
 							{
-							// ±æµå¿¡´Â °¡ÀÔµÇ¾î ÀÖÁö¸¸ °°Àº ±æµå ¼Ò¼ÓÀÌ ¾Æ´Ï¹Ç·Î ¿ÜºÎÀÎÀ¸·Î °£ÁÖÇÔ.
+							// ê¸¸ë“œì—ëŠ” ê°€ì…ë˜ì–´ ìˆì§€ë§Œ ê°™ì€ ê¸¸ë“œ ì†Œì†ì´ ì•„ë‹ˆë¯€ë¡œ ì™¸ë¶€ì¸ìœ¼ë¡œ ê°„ì£¼í•¨.
 								AllowTeleport = ChackAllowByLeader(player, Cutter[2], false);
 								break;
 							}
 						}
 						j++;
 					}
-					if(! AllowTeleport)// ¸¸¾à¿¡ ¸®´õ°¡ Çã°¡ÇÏÁö ¾Ê¾Ò´Ù¸é
+					if(! AllowTeleport)// ë§Œì•½ì— ë¦¬ë”ê°€ í—ˆê°€í•˜ì§€ ì•Šì•˜ë‹¤ë©´
 					{
 						if(player.hasPermission("rmanager.teleport.bypass"))
 						{
 							return;
 						}
-						if(SameGuild) //ºí·¢ ¸®½ºÆ®·Î ÁöÁ¤Çß´Ù¸é
+						if(SameGuild) //ë¸”ë™ ë¦¬ìŠ¤íŠ¸ë¡œ ì§€ì •í–ˆë‹¤ë©´
 						{
 							Event.setCancelled(true);
-							player.sendMessage(rManager.Prefix + "¡×cÇØ´ç ¿ùµå·Î ÀÌµ¿ÇÒ ¼ö ¾ø¾ú½À´Ï´Ù.");
-							player.sendMessage(rManager.Prefix + "¡×b»çÀ¯  ¡×f: ¡×c±æµåÀåÀÌ À¯Àú´ÔÀ» ºí·¢¸®½ºÆ®·Î µî·Ï");
+							player.sendMessage(rManager.Prefix + "Â§cí•´ë‹¹ ì›”ë“œë¡œ ì´ë™í•  ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
+							player.sendMessage(rManager.Prefix + "Â§bì‚¬ìœ   Â§f: Â§cê¸¸ë“œì¥ì´ ìœ ì €ë‹˜ì„ ë¸”ë™ë¦¬ìŠ¤íŠ¸ë¡œ ë“±ë¡");
 							return;
 						}
 						else
 						{
 							Event.setCancelled(true);
-							player.sendMessage(rManager.Prefix + "¡×cÇØ´ç ¿ùµå·Î ÀÌµ¿ÇÒ ¼ö ¾ø¾ú½À´Ï´Ù.");
-							player.sendMessage(rManager.Prefix + "¡×b»çÀ¯ ¡×f: ¡×6¿ÜºÎÀÎÀÌ¶ó¸é ÇØ´ç ¿ùµå´Â ±æµå °ü°èÀÚ Çã°¡°¡ ÀÖ¾î¾ß ÇÕ´Ï´Ù.");
+							player.sendMessage(rManager.Prefix + "Â§cí•´ë‹¹ ì›”ë“œë¡œ ì´ë™í•  ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
+							player.sendMessage(rManager.Prefix + "Â§bì‚¬ìœ  Â§f: Â§6ì™¸ë¶€ì¸ì´ë¼ë©´ í•´ë‹¹ ì›”ë“œëŠ” ê¸¸ë“œ ê´€ê³„ì í—ˆê°€ê°€ ìˆì–´ì•¼ í•©ë‹ˆë‹¤.");
 							return;
 						}
 					}
@@ -132,27 +132,27 @@ public class rManagerSecurity extends JavaPlugin
 		}
 	}
 
-	public static boolean ChackAllowByLeader(Player player, String LeaderName, boolean JoinedGuild) //¸®´õ°¡ Çã¶ôÀ» ÇÏ¿´´Â°¡?
+	public static boolean ChackAllowByLeader(Player player, String LeaderName, boolean JoinedGuild) //ë¦¬ë”ê°€ í—ˆë½ì„ í•˜ì˜€ëŠ”ê°€?
 	{
 		File LeaderFile = new File("plugins/rManager/Players/" + LeaderName + ".yml");
 		if(! LeaderFile.exists())
 		{
 			player.sendMessage(rManager.Prefix + "Unexpected Error. The leader database who has the world does not exist.");
-			player.sendMessage(rManager.Prefix + "¡×b¿¹»óÄ¡ ¸øÇÑ ¿À·ù°¡ ³ª¿Ô½À´Ï´Ù. ÇØ´ç ¿ùµå¸¦ ¼ÒÀ¯ÇÑ ±æµåÀåÀÇ µ¥ÀÌÅÍ¸¦ ÀĞ¾î¿Ã ¼ö ¾ø¾ú½À´Ï´Ù.");
+			player.sendMessage(rManager.Prefix + "Â§bì˜ˆìƒì¹˜ ëª»í•œ ì˜¤ë¥˜ê°€ ë‚˜ì™”ìŠµë‹ˆë‹¤. í•´ë‹¹ ì›”ë“œë¥¼ ì†Œìœ í•œ ê¸¸ë“œì¥ì˜ ë°ì´í„°ë¥¼ ì½ì–´ì˜¬ ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
 			return false;
 		}
 		YamlConfiguration Y = YamlConfiguration.loadConfiguration(LeaderFile);
 		boolean byPass = Y.getBoolean("Bypass-in-the-World");
-		boolean Found = false; // Ã³À½¿¡´Â ¸øÃ£¾Ò´Ù°í °¡Á¤À» ÇÑ´Ù
-		if(JoinedGuild) //°°Àº ±æµå¿¡ °¡ÀÔµÇ¾î ÀÖ´Â »ç¶÷ÀÌ °Ë»ç¸¦ ¿ä±¸ÇÑ´Ù¸é
+		boolean Found = false; // ì²˜ìŒì—ëŠ” ëª»ì°¾ì•˜ë‹¤ê³  ê°€ì •ì„ í•œë‹¤
+		if(JoinedGuild) //ê°™ì€ ê¸¸ë“œì— ê°€ì…ë˜ì–´ ìˆëŠ” ì‚¬ëŒì´ ê²€ì‚¬ë¥¼ ìš”êµ¬í•œë‹¤ë©´
 		{
-			//ºí·¢ ¸®½ºÆ® °Ë»ç
+			//ë¸”ë™ ë¦¬ìŠ¤íŠ¸ ê²€ì‚¬
 			rManager.PlayerBlacklist = Y.getStringList("Blacklist");
 			int i = 0;
 			while(i != rManager.PlayerBlacklist.size())
 			{
 				String[] Cutter = rManager.PlayerBlacklist.get(i).split(",");
-				if(Cutter[0].equalsIgnoreCase(player.getName())) // ºí·¢¸®½ºÆ® ¿´´Ù¸é
+				if(Cutter[0].equalsIgnoreCase(player.getName())) // ë¸”ë™ë¦¬ìŠ¤íŠ¸ ì˜€ë‹¤ë©´
 				{
 					return Found;
 				}
@@ -160,13 +160,13 @@ public class rManagerSecurity extends JavaPlugin
 			}
 			return !(Found);
 		}
-		else // ¾Æ´Ï¶ó¸é
+		else // ì•„ë‹ˆë¼ë©´
 		{
-			rManager.PlayerAllowPlayers = Y.getStringList("Allow-Players"); // Çã°¡µÇ¾ú´ÂÁö °Ë»ç
+			rManager.PlayerAllowPlayers = Y.getStringList("Allow-Players"); // í—ˆê°€ë˜ì—ˆëŠ”ì§€ ê²€ì‚¬
 			int i = 0;
 			while(i != rManager.PlayerAllowPlayers.size() && rManager.PlayerAllowPlayers.size() != 0)
 			{
-				if(rManager.PlayerAllowPlayers.get(i).equalsIgnoreCase(player.getName())) // Çã°¡µÇ¾ú´Ù¸é
+				if(rManager.PlayerAllowPlayers.get(i).equalsIgnoreCase(player.getName())) // í—ˆê°€ë˜ì—ˆë‹¤ë©´
 				{
 					Found = true;
 					break;
@@ -177,7 +177,7 @@ public class rManagerSecurity extends JavaPlugin
 			rManager.PlayerBlacklist = Y.getStringList("Blacklist");
 			while(x != rManager.PlayerBlacklist.size())
 			{
-				if(rManager.PlayerBlacklist.get(x).equalsIgnoreCase(player.getName())) // ºí·¢¸®½ºÆ® ¿´´Ù¸é
+				if(rManager.PlayerBlacklist.get(x).equalsIgnoreCase(player.getName())) // ë¸”ë™ë¦¬ìŠ¤íŠ¸ ì˜€ë‹¤ë©´
 				{
 					Found = false;
 					break;
