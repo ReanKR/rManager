@@ -1,0 +1,30 @@
+# ReanTutorial Main config file
+# Made by Rean KR, whitehack97@gmail.com
+Main:
+  Config-Version: 1
+  Run-First-Join-Player: false
+  Block-Movement: true
+  Block-All-Commands: true
+  Broadcast-Complete-Tutorial: false
+  Edit-Complete: false
+  Command: tutorial
+Compatibles:
+  BarAPI: false
+  TitleAPI: false
+  Vault: false
+  Economy: false
+  rManager: false
+Result:
+  Commands:
+  - Console: broadcast %player$ Tutorial Complete.
+  - Money: 100
+  - spawn %Player%
+  Items:
+    0:
+      ID: 2
+      DATA-VALUE: 0
+      Amounts: 10
+    1:
+      ID: 35
+      DATA-VALUE: 15
+      Amounts: 10

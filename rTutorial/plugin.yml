@@ -1,0 +1,15 @@
+﻿name: rTutorial
+version: 1.1.0
+main: com.ReanKR.rTutorial.rTutorial
+author: ReanKR
+description: To provide convenient functions.
+commands:
+  rtutorial.main:
+    description: §erTutorial Main command
+    aliases: [rt, rtutorial]
+  tutorial:
+    description: §erTutorial Main command
+permissions:
+  tutorial.*:
+    description: rTutorial와 관련한 모든 권한을 사용할 수 있습니다.
+    default: false

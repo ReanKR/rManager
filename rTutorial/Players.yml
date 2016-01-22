@@ -1,0 +1,9 @@
+Players:
+  UUID: 12345678-90ab-cde0-1234-567890abcde0
+    PlayerName: TestName
+    Completed: true
+    Status: NONE
+  UUID: 12345678-90ab-cde0-1234-567890abcde0
+    PlayerName: TestName
+    Completed: true
+    Status: NONE

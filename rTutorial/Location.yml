@@ -1,0 +1,25 @@
+Location:
+  0:
+    World: World
+    Location:
+      Coordinate: 0.00000,250.00000,0.00000
+      Angle: -14.0000.-215.0000
+    Message:
+      Time:
+        Fadein: 2
+        Fadeout: 2
+        Duration: 5
+      Title: '&eWelcome to my Server!'
+      SubTitle: '&bThe Server using rTutorial plugin.'
+  1:
+    World: World
+    Location:
+      Coordinate: 0.00000,128.00000,0.00000
+      Angle: -14.0000.-215.0000
+    Message:
+      Time:
+        Fadein: 1
+        Fadeout: 1
+        Duration: 7.0
+      Title: '&6Use command /rt set'
+      SubTitle: '&fPlease Set Tutorial location.'
